@@ -1,0 +1,20 @@
+describe('MyComponent', () => {
+  let shallow: Shallow<MyComponent>;
+  
+  beforeEach(() => {
+    shallow = new Shallow(MyComponent, MyModule);
+  });
+
+  it('renders a link with the provided label text', async () => {
+    const {find} = await shallow.render('<my-component linkText="my text"></my-component>');
+
+    expect(find('a').nativeElement.innerText).toBe('my text');
+  });
+
+  it('outputs "foo" when clicked', async () => {
+    const {element, instance} = await shallow.render();
+    element.click();
+
+    expect(instance.click.emit).toHaveBeenCalledWith('foo');
+  });
+});
