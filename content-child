@@ -1,0 +1,33 @@
+/////////////////////
+// Component
+/////////////////////
+@Component({
+  selector: 'list-container',
+  template: '<ul><ng-content></ng-content></ul>',
+})
+class ListContainerComponent implements AfterContentInit {
+  @ContentChild(ListItemComponent) listItem: ListItemComponent;
+  ngAfterContentInit() {
+    if (this.listItem) {
+      this.listItem.activate();
+    }
+  }
+}
+
+/////////////////////
+// Test
+/////////////////////
+it('activates the first item in the list', async () => {
+  const {findComponent} = await shallow
+    .mock(ListItemComponent, {activate: () => undefined})
+    .render(`
+      <list-container>
+        <list-item>Foo</list-item>
+        <list-item>Bar</list-item>
+      </list-container>
+    `);
+
+  const listItems = findComponent(ListItemComponent);
+  expect(listItems[0].activate).toHaveBeenCalled();
+  expect(listItems[1].activate).not.toHaveBeenCalled();
+});
