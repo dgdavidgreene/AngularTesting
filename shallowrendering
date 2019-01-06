@@ -1,0 +1,16 @@
+Shallow rendering eliminates the need for boilerplate like testbed configuration:
+
+Reuses (and verifies) MyModule contains your component and all its dependencies.
+
+All components inside MyModule are automatically mocked identical inputs/outputs using ng-mocks. 
+This is what makes the rendering "shallow".
+
+The tests have far less boilerplate which makes the tests easier to follow.
+
+The mocks are type safe.
+
+In our tests, we decided to use HTML to render the test-component IN THE SPEC where it’s easy to find. 
+Each spec may have different templates, no problem.
+
+We can choose not to use HTML, we just went straight for the bindings. 
+The bindings here are type-safe and the output property’s emit function was automatically spied on.
