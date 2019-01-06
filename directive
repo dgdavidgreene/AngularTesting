@@ -1,0 +1,16 @@
+////// Directive //////
+@Directive({
+  selector: '[red]',
+})
+class RedDirective {
+  constructor(el: ElementRef) {
+    el.nativeElement.style.backgroundColor = 'red';
+  }
+}
+
+/////// Test //////
+it('makes the background color red', async () => {
+  const {element} = await shallow.render('<div red></div>');
+
+  expect(element.nativeElement.style.backgroundColor).toBe('red');
+});
