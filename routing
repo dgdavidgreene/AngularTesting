@@ -1,0 +1,50 @@
+/////////////////////////
+// Component
+/////////////////////////
+@Component({
+  selector: 'go-home-link',
+  template: '<a (click)="goHome()">Go somewhere</a>',
+})
+class GoHomeLinkComponent {
+  constructor(public router: Router) {}
+
+  goHome() {
+    this.router.navigate(['home']);
+  }
+}
+
+/////////////////////////
+// Module
+/////////////////////////
+const routes: Routes = [
+  {path: 'home', component: class DummyComponent {}}
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  providers: [{provide: APP_BASE_HREF, useValue: '/'}],
+  declarations: [GoHomeLinkComponent],
+})
+class GoHomeModule {}
+//////////////////////////
+
+/////////////////////////
+// Tests
+/////////////////////////
+describe('component with routing', () => {
+  let shallow: Shallow<GoHomeLinkComponent>;
+
+  beforeEach(() => {
+    shallow = new Shallow(GoHomeLinkComponent, GoHomeModule)
+      .replaceModule(RouterModule, RouterTestingModule.withRoutes(routes));
+  });
+
+  it('navigates home', async () => {
+    const {fixture, find, get} = await shallow.render();
+    const location = get(Location);
+    find('a').triggerEventHandler('click', {});
+    await fixture.whenStable();
+
+    expect(location.path()).toBe('/home');
+  });
+});
