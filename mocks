@@ -1,0 +1,21 @@
+describe('component with service', () => {
+  let shallow: Shallow<ColorLabelComponent>;
+
+beforeEach(() => {  
+  // can chain multiple mocks
+  shallow = new Shallow(ColorLabelComponent, ColorModule)
+    .mock(RedService, {color: () => 'MOCKED Red'})
+    .mock(BlueService, {
+      color: () => 'MOCKED Blue',
+      alternateColor: () => 'ALTERNATE Blue'
+     });
+});
+
+it('Uses the color from the RedService', async () => {
+  // can also override prior mock
+  const {element} = await shallow
+    .mock(RedService, {color: () => 'MOCKED COLOR'})
+    .render();
+
+  expect(element.nativeElement.innerText).toBe('MOCKED COLOR');
+});
