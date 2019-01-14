@@ -1,4 +1,4 @@
-Shallow rendering eliminates the need for boilerplate like testbed configuration:
+Shallow rendering eliminates the need for so much boilerplate like for the testbed configuration:
 
 Reuses (and verifies) MyModule contains your component and all its dependencies.
 
@@ -9,7 +9,9 @@ The tests have far less boilerplate which makes the tests easier to follow.
 
 The mocks are type safe.
 
-In our tests, we decided to use HTML to render the test-component IN THE SPEC where it’s easy to find. 
+Can use HTML to render the test-component IN THE SPEC where it’s easy to find.
+
+
 Each spec may have different templates, no problem.
 
 We can choose not to use HTML, we just went straight for the bindings. 
