@@ -1,4 +1,4 @@
-Shallow rendering eliminates the need for so much boilerplate like for the testbed configuration:
+Shallow rendering eliminates the need for so much boilerplate for the testbed configuration.
 
 Reuses (and verifies) MyModule contains your component and all its dependencies.
 
@@ -9,8 +9,10 @@ The tests have far less boilerplate which makes the tests easier to follow.
 
 The mocks are type safe.
 
-Can use HTML to render the test-component IN THE SPEC where it’s easy to find.
+NO_ERRORS_SCHEMA is designed to prevent error reporting in templates. Shallow rendering means you do not need it, 
+and can eliminate that kind of test noise.
 
+Can use HTML to render the test-component IN THE SPEC where it’s easy to find.
 
 Each spec may have different templates, no problem.
 
